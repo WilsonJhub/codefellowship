@@ -48,10 +48,10 @@ public class CodeFellowshipController {
 
     // post to signup
     @PostMapping ("/signup")
-    public RedirectView createUser(String username, String password, String firstName, String lastName, String dateOfBirth, String Bio){
+    public RedirectView createUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio){
         // hash the password
         String hashedPw = passwordEncoder.encode(password);
-        CodeFellowshipUser newUser = new CodeFellowshipUser(username, hashedPw, firstName, lastName, dateOfBirth, Bio);
+        CodeFellowshipUser newUser = new CodeFellowshipUser(username, hashedPw, firstName, lastName, dateOfBirth, bio);
         codeFellowshipRepo.save(newUser);
 
         authWithHttpServletRequest(username, password);
