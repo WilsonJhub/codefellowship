@@ -1,13 +1,17 @@
 package com.codefellowship.CodeFellowShip.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Collection;
 
 
 @Entity
-public class CodeFellowshipUser {
+public class CodeFellowshipUser implements UserDetails {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String username;
@@ -16,6 +20,10 @@ public class CodeFellowshipUser {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+
+    public CodeFellowshipUser(){
+
+    }
 
     public CodeFellowshipUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
         this.username = username;
@@ -39,8 +47,33 @@ public class CodeFellowshipUser {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {
@@ -82,4 +115,6 @@ public class CodeFellowshipUser {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+
 }
