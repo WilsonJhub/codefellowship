@@ -3,6 +3,7 @@ package com.codefellowship.CodeFellowShip.controller;
 import com.codefellowship.CodeFellowShip.model.CodeFellowshipUser;
 import com.codefellowship.CodeFellowShip.repository.CodeFellowshipRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,9 @@ public class CodeFellowshipController {
 
     @Autowired
     CodeFellowshipRepo codeFellowshipRepo;
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     // get to signup
     @GetMapping("/signup")
@@ -33,7 +37,7 @@ public class CodeFellowshipController {
     @PostMapping ("/signup")
     public RedirectView createUser(String username, String password, String firstName, String lastName, String dateOfBirth, String Bio){
         // hash the password
-        String hashedPw; // passwordEncoder
+        String hashedPw = "empty"; // passwordEncoder
         CodeFellowshipUser newUser = new CodeFellowshipUser(username, hashedPw, firstName, lastName, dateOfBirth, Bio);
         codeFellowshipRepo.save(newUser);
 
