@@ -6,6 +6,7 @@
 </head>
 <body>
 <h3 th:if="${username != null}" th:text="${'Current user: ' + username}"></h3>
+
 <h1>Welcome to Code Fellowship! Where our home is your home!</h1>
 
 <a th:if="!${username}" href="/login">Log In</a>
