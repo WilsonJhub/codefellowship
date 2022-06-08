@@ -23,29 +23,29 @@ public class CodeFellowshipController {
     }
 
     // get to login
-    @GetMapping("/login")
-    public String getLoginPage(){
-
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String getLoginPage(){
+//
+//        return "login";
+//    }
 
     // post to signup
     @PostMapping ("/signup")
-    public RedirectView createUser(String username, String password){
+    public RedirectView createUser(String username, String password, String firstName, String lastName, String dateOfBirth, String Bio){
         // hash the password
         String hashedPw; // passwordEncoder
-        CodeFellowshipUser newUser = new CodeFellowshipUser(username, hashedPw);
+        CodeFellowshipUser newUser = new CodeFellowshipUser(username, hashedPw, firstName, lastName, dateOfBirth, Bio);
         codeFellowshipRepo.save(newUser);
 
         return new RedirectView("/login");
     }
 
     //post to login
-    @PostMapping ("/login")
-    public RedirectView logInUser(String username, String password){
-
-
-        return new RedirectView("/");
-    }
+//    @PostMapping ("/login")
+//    public RedirectView logInUser(String username, String password){
+//
+//
+//        return new RedirectView("/");
+//    }
 
 }
