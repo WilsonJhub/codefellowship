@@ -30,20 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    public void configure(HttpSecurity http) throws Exception{
         http
-                    .cors().disable()
-                    .csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/signup").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                    .formLogin()
-                    .loginPage("/login").permitAll()
-                    .defaultSuccessUrl("/")
-                    .and()
-                    .logout()
-                    .logoutSuccessUrl("/login");
+                .cors().disable()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/userPage", "/login", "/signup").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/myProfile")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login");
     }
 }
