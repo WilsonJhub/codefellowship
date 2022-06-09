@@ -8,7 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Collection;
-
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 public class CodeFellowshipUser implements UserDetails {
@@ -20,6 +21,9 @@ public class CodeFellowshipUser implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+
+    @OneToMany(mappedBy = "codeFellowshipUser")
+    List<Post> userPosts;
 
     public CodeFellowshipUser(){
 
@@ -43,9 +47,7 @@ public class CodeFellowshipUser implements UserDetails {
 //        this.bio = bio;
 //    }
 
-    public String getUsername() {
-        return username;
-    }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -67,14 +69,28 @@ public class CodeFellowshipUser implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     public String getPassword() {
         return password;
@@ -116,5 +132,12 @@ public class CodeFellowshipUser implements UserDetails {
         this.bio = bio;
     }
 
+    public List<Post> getUserPosts() {
+        return userPosts;
+    }
+
+    public void setUserPosts(List<Post> userPosts) {
+        this.userPosts = userPosts;
+    }
 
 }

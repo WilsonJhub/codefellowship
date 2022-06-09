@@ -1,10 +1,12 @@
 package com.codefellowship.CodeFellowShip.controller;
 
 import com.codefellowship.CodeFellowShip.model.CodeFellowshipUser;
+import com.codefellowship.CodeFellowShip.model.Post;
 import com.codefellowship.CodeFellowShip.repository.CodeFellowshipRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
@@ -12,6 +14,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -40,11 +44,29 @@ public class CodeFellowshipController {
         return "login";
     }
 
-    @GetMapping("/home")
-    public String getHomePage(){
 
-        return "home";
+    @GetMapping("/myprofile")
+        public String getMyProfile(Principal p, Model m){
+        if(p != null){
+            String username = p.getName();
+            CodeFellowshipUser user = codeFellowshipRepo.findByUsername(username);
+            List<Post> postList = user.getUserPosts();
+
+            m.addAttribute("user", user);
+            m.addAttribute("posts",postList);
+        }
+
+
+        return "myProfile";
     }
+
+
+
+//    @GetMapping("/home")
+//    public String getHomePage(){
+//
+//        return "home";
+//    }
 
     // post to signup
     @PostMapping ("/signup")
