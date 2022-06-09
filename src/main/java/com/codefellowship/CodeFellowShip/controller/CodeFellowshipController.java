@@ -45,20 +45,20 @@ public class CodeFellowshipController {
     }
 
 
-    @GetMapping("/myprofile")
-        public String getMyProfile(Principal p, Model m){
-        if(p != null){
-            String username = p.getName();
-            CodeFellowshipUser user = codeFellowshipRepo.findByUsername(username);
-            List<Post> postList = user.getUserPosts();
-
-            m.addAttribute("user", user);
-            m.addAttribute("posts",postList);
-        }
-
-
-        return "myProfile";
-    }
+//    @GetMapping("/myprofile")
+//        public String getMyProfile(Principal p, Model m){
+//        if(p != null){
+//            String username = p.getName();
+//            CodeFellowshipUser user = codeFellowshipRepo.findByUsername(username);
+//            List<Post> postList = user.getUserPosts();
+//
+//            m.addAttribute("user", user);
+//            m.addAttribute("posts",postList);
+//        }
+//
+//
+//        return "myProfile";
+//    }
 
 
 
